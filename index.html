@@ -1,0 +1,52 @@
+<!DOCTYPE html>
+<html>
+
+<link rel="stylesheet" type="text/css" href="style.css" />
+<link rel="stylesheet" href="https://stackpath.bootstrapcdn.com/bootstrap/4.3.1/css/bootstrap.min.css"
+    integrity="sha384-ggOyR0iXCbMQv3Xipma34MD+dH/1fQ784/j6cY/iJTQUOhcWr7x9JvoRxT2MZw1T" crossorigin="anonymous">
+
+<body>
+
+    <h1>Countdown Clock</h1>
+    <div class="container">
+        <div class="row">
+            <div class="col-12">
+                <label>Horas</label>
+                <input id="hours" type="number" class="form-control" placeholder="0">
+            </div>
+            <div class="col-12">
+                <label>Minutos</label>
+                <input id="minutes" type="number" class="form-control" placeholder="0">
+            </div>
+            <div class="col-12">
+                <label>Segundos</label>
+                <input id="seconds" type="number" class="form-control" placeholder="0">
+            </div>
+            <div class="col-12">
+                <button type="button" class="btn btn-lg btn-primary" onclick="executeCountDown()">Iniciar</button>
+            </div>
+        </div>
+
+    </div>
+    <div id="clockdiv">
+        <!-- <div>
+        <span class="days"></span>
+        <div class="smalltext">Days</div>
+      </div> -->
+        <div>
+            <span class="hours"></span>
+            <div class="smalltext">Hours</div>
+        </div>
+        <div>
+            <span class="minutes"></span>
+            <div class="smalltext">Minutes</div>
+        </div>
+        <div>
+            <span class="seconds"></span>
+            <div class="smalltext">Seconds</div>
+        </div>
+    </div>
+    <script src="app.js"></script>
+</body>
+
+</html>
