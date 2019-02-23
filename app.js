@@ -1,11 +1,15 @@
 //this code is based on https://www.sitepoint.com/build-javascript-countdown-timer-no-dependencies/
-
-const getTimeLeft = (endtime) => {
-    var t = Date.parse(endtime) - Date.parse(new Date());
+var currentDate = undefined;
+const getTimeLeft = (endtime, currentDate) => {
+    console.log("End", endtime);
+    console.log("Current", currentDate);
+    var t = Date.parse(endtime) - Date.parse(currentDate);
+    console.log("Diff", t)
     var seconds = Math.floor((t / 1000) % 60);
     var minutes = Math.floor((t / 1000 / 60) % 60);
     var hours = Math.floor((t / (1000 * 60 * 60)) % 24);
     var days = Math.floor(t / (1000 * 60 * 60 * 24));
+    console.log("DAYS", days);
     return {
         'total': t,
         'days': days,
@@ -15,14 +19,14 @@ const getTimeLeft = (endtime) => {
     };
 }
 
-const startCountDown = (id, endtime) => {
+const startCountDown = (id, endtime, currentDate) => {
     var clock = document.getElementById(id);
     var hoursSpan = clock.querySelector('.hours');
     var minutesSpan = clock.querySelector('.minutes');
     var secondsSpan = clock.querySelector('.seconds');
 
     const updateClock = () => {
-        var t = getTimeLeft(endtime);
+        var t = getTimeLeft(endtime, currentDate);
         hoursSpan.innerHTML = ('0' + t.hours).slice(-2);
         minutesSpan.innerHTML = ('0' + t.minutes).slice(-2);
         secondsSpan.innerHTML = ('0' + t.seconds).slice(-2);
@@ -37,16 +41,17 @@ const startCountDown = (id, endtime) => {
 }
 
 const executeCountDown = () => {
-    let hourValue = document.getElementById('hours').value*60;
-    let minutesValue = document.getElementById('minutes').value*60;
-    let secondsValue = document.getElementById('seconds').value*1000;
-    var sumsec =  hourValue*minutesValue*secondsValue;
+    let hourValue = document.getElementById('hours').value;
+    let minutesValue = document.getElementById('minutes').value;
+    let secondsValue = document.getElementById('seconds').value;
+    //var sumsec =  hourValue*minutesValue*secondsValue;
+    var sumsec =hourValue*60*60*1000 + minutesValue*60*1000 + secondsValue*1000;
+
+    currentDate = new Date();
     console.log("suma sec", sumsec);
-    console.log("date new", new Date(Date.parse(new Date()) + sumsec));
-    console.log("resuuuly", new Date(Date.parse(new Date())+hourValue*minutesValue*secondsValue*1000));
     
-    var deadline = new Date(Date.parse(new Date()) + sumsec);
+    var deadline = new Date(Date.parse(currentDate) + sumsec);
    
 
-    startCountDown('clockdiv', deadline);
+    startCountDown('clockdiv', deadline, currentDate);
 }
