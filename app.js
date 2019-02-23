@@ -3,8 +3,8 @@ var currentDate = undefined;
 const getTimeLeft = (endtime, currentDate) => {
     console.log("End", endtime);
     console.log("Current", currentDate);
-    var t = Date.parse(endtime) - Date.parse(currentDate);
-    console.log("Diff", t)
+    var t = Date.parse(endtime) - Date.parse(new Date());
+    console.log("Diff", new Date(t))
     var seconds = Math.floor((t / 1000) % 60);
     var minutes = Math.floor((t / 1000 / 60) % 60);
     var hours = Math.floor((t / (1000 * 60 * 60)) % 24);
