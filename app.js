@@ -1,8 +1,8 @@
 //this code is based on https://www.sitepoint.com/build-javascript-countdown-timer-no-dependencies/
+var timeinterval = undefined;
 var currentDate = undefined;
-const getTimeLeft = (endtime, currentDate) => {
+const getTimeLeft = (endtime) => {
     console.log("End", endtime);
-    console.log("Current", currentDate);
     var t = Date.parse(endtime) - Date.parse(new Date());
     console.log("Diff", new Date(t))
     var seconds = Math.floor((t / 1000) % 60);
@@ -19,14 +19,14 @@ const getTimeLeft = (endtime, currentDate) => {
     };
 }
 
-const startCountDown = (id, endtime, currentDate) => {
+const startCountDown = (id, endtime) => {
     var clock = document.getElementById(id);
     var hoursSpan = clock.querySelector('.hours');
     var minutesSpan = clock.querySelector('.minutes');
     var secondsSpan = clock.querySelector('.seconds');
 
     const updateClock = () => {
-        var t = getTimeLeft(endtime, currentDate);
+        var t = getTimeLeft(endtime);
         hoursSpan.innerHTML = ('0' + t.hours).slice(-2);
         minutesSpan.innerHTML = ('0' + t.minutes).slice(-2);
         secondsSpan.innerHTML = ('0' + t.seconds).slice(-2);
@@ -37,10 +37,13 @@ const startCountDown = (id, endtime, currentDate) => {
     }
 
     updateClock();
-    var timeinterval = setInterval(updateClock, 1000);
+    timeinterval = setInterval(updateClock, 1000);
 }
 
 const executeCountDown = () => {
+    if(timeinterval !== undefined)
+        clearInterval(timeinterval);
+        
     let hourValue = document.getElementById('hours').value;
     let minutesValue = document.getElementById('minutes').value;
     let secondsValue = document.getElementById('seconds').value;
@@ -53,5 +56,5 @@ const executeCountDown = () => {
     var deadline = new Date(Date.parse(currentDate) + sumsec);
    
 
-    startCountDown('clockdiv', deadline, currentDate);
+    startCountDown('clockdiv', deadline);
 }
